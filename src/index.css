@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ============ 动画定义 ============ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.15); }
+}
+
+/* 基础动画类 */
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+  opacity: 0;
+}
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 1s ease-in-out infinite; }
+.animate-slide-up {
+  animation: slideUp 0.5s ease forwards;
+  opacity: 0;
+}
+.animate-heartbeat { animation: heartbeat 1s ease-in-out; }
+
+/* 悬停发光效果 */
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+}
+
+/* 精选卡片特殊效果 */
+.featured-card {
+  position: relative;
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #fbbf24, #f472b6, #a78bfa, #38bdf8);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.featured-card:hover::before {
+  opacity: 1;
+}
+
+/* ============ 滚动条美化 ============ */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(247, 223, 250, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c4b5fd, #f9a8d4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #a78bfa, #f472b6);
+}
+
+/* 隐藏滚动条但保持滚动 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============ 移动端优化 ============ */
+
+/* 确保触摸区域足够大 */
+@media (max-width: 640px) {
+  /* 优化移动端触摸反馈 */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 防止文本选择时样式混乱 */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* 大屏幕优化 */
+@media (min-width: 1280px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* 打印样式优化 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* 暗色模式预留（暂不启用，保持可爱风格）*/
+@media (prefers-color-scheme: dark) {
+  /* 未来可添加暗色模式 */
+}
